@@ -297,10 +297,6 @@
         <span><i class="fas fa-utensils"></i> Comedor</span>
         <span class="estado" id="estado-comedor">--</span>
       </button>
-      <button class="btn-control toggle-luz" data-path="patio_trasero">
-        <span><i class="fas fa-tree"></i> Patio trasero</span>
-        <span class="estado" id="estado-patio_trasero">--</span>
-      </button>
       <button class="btn-control toggle-luz" data-path="habitacion1">
         <span><i class="fas fa-bed"></i> Habitación 1</span>
         <span class="estado" id="estado-habitacion1">--</span>
@@ -308,7 +304,7 @@
     </div>
 
     <div class="card">
-      <h4><i class="fas fa-fan"></i> Abanico</h4>
+      <h4><i class="fas fa-fan"></i> Ventilador</h4>
       <button class="btn-control toggle-abanico" data-path="habitacion1">
         <span><i class="fas fa-fan"></i> Habitación 1</span>
         <span class="estado" id="estado-abanico">--</span>
@@ -457,10 +453,9 @@ function setupToggle(selector, pathBase, key, onValue, offValue, estadoId) {
 // Luces
 setupToggle('.toggle-luz', 'CasaIoT/Luces', 'sala', 'Encendido', 'Apagado');
 setupToggle('.toggle-luz', 'CasaIoT/Luces', 'comedor', 'Encendido', 'Apagado');
-setupToggle('.toggle-luz', 'CasaIoT/Luces', 'patio_trasero', 'Encendido', 'Apagado');
 setupToggle('.toggle-luz', 'CasaIoT/Luces', 'habitacion1', 'Encendido', 'Apagado');
 
-// Abanico
+// Ventilador
 setupToggle('.toggle-abanico', 'CasaIoT/Abanico', 'habitacion1', 'Encendido', 'Apagado', 'estado-abanico');
 
 // Puertas
@@ -515,7 +510,7 @@ window.toggleTodasLuces = function() {
   ref.once('value').then(snap => {
     const nuevo = snap.val() === 'Encendido' ? 'Apagado' : 'Encendido';
     ref.set(nuevo);
-    ['sala', 'comedor', 'patio_trasero', 'habitacion1'].forEach(k => {
+    ['sala', 'comedor', 'habitacion1'].forEach(k => {
       db.ref('CasaIoT/Luces/' + k).set(nuevo);
     });
   });
